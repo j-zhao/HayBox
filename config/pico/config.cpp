@@ -24,17 +24,17 @@ size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
 GpioButtonMapping button_mappings[] = {
-    {&InputState::l,            5 },
+    {&InputState::mod_x,        5 },
     { &InputState::left,        4 },
     { &InputState::up,          3 },
     { &InputState::right,       2 },
 
-    { &InputState::lightshield, 6 },
+    { &InputState::mod_y,       6 },
     { &InputState::down,        7 },
 
-    { &InputState::select,      10},
+ // { &InputState::select,      10},
     { &InputState::start,       0 },
-    { &InputState::home,        11},
+ // { &InputState::home,        11},
 
     { &InputState::c_left,      13},
     { &InputState::c_up,        12},
@@ -47,10 +47,10 @@ GpioButtonMapping button_mappings[] = {
     { &InputState::z,           19},
     { &InputState::r,           17},
 
-    { &InputState::y,           27},
-    { &InputState::midshield,   22},
-    { &InputState::mod_x,       20},
-    { &InputState::mod_y,       18},
+    { &InputState::l,           27},
+    { &InputState::y,           22},
+    { &InputState::lightshield, 20},
+    { &InputState::midshield,   18},
 };
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
@@ -129,7 +129,7 @@ void setup() {
     }
 
     // Default to Melee mode.
-    primary_backend->SetGameMode(new Melee20Button(socd::SOCD_NEUTRAL, { .crouch_walk_os = true }));
+    primary_backend->SetGameMode(new Melee20Button(socd::SOCD_2IP, { .crouch_walk_os = false }));
 }
 
 void loop() {
