@@ -19,24 +19,27 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.dpadLeft = inputs.left;
     outputs.dpadRight = inputs.right;
     outputs.dpadDown = inputs.down;
-    outputs.dpadUp = inputs.mod_x || inputs.c_up;
+    outputs.dpadUp = inputs.up;
 
     // Menu keys
     outputs.start = inputs.start;
     outputs.select = inputs.c_left;
     outputs.home = inputs.c_down;
 
+    outputs.a = inputs.a;
     // Right hand bottom row
-    outputs.a = inputs.b;
-    outputs.b = inputs.x;
-    outputs.triggerRDigital = inputs.z;
-    outputs.triggerLDigital = inputs.up;
+    outputs.x = inputs.x;
+    outputs.b = inputs.b;
+    outputs.triggerRDigital = inputs.midshield;
+    outputs.triggerLDigital = inputs.lightshield;
 
     // Right hand top row
-    outputs.x = inputs.r;
-    outputs.y = inputs.y;
-    outputs.buttonR = inputs.lightshield;
-    outputs.buttonL = inputs.midshield;
+    outputs.y = inputs.l;
+    outputs.buttonR = inputs.r;
+    outputs.buttonL = inputs.z;
+
+    outputs.leftStickClick = inputs.c_up;
+    outputs.rightStickClick = inputs.c_right;
 }
 
 void FgcMode::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
