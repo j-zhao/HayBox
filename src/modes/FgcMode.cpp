@@ -23,9 +23,9 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
 
     // Right hand bottom row
     outputs.a = inputs.x;
-    outputs.y = inputs.b;
-    outputs.triggerLDigital = inputs.z;
-    outputs.triggerRDigital = inputs.r;
+    outputs.b = inputs.b;
+    outputs.buttonL = inputs.z;
+    outputs.buttonR = inputs.r;
 
     // Right hand top row
     outputs.x = inputs.l;
@@ -37,8 +37,8 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.start = inputs.start;
     outputs.select = inputs.c_left;
     outputs.home = inputs.c_down;
-    outputs.leftStickClick = inputs.up;
-    outputs.rightStickClick = inputs.right;
+    outputs.leftStickClick = inputs.c_up;
+    outputs.rightStickClick = inputs.c_right;
 }
 
 void FgcMode::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
