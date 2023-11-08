@@ -30,8 +30,8 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     // Right hand top row
     outputs.x = inputs.l;
     outputs.y = inputs.y;
-    outputs.buttonL = inputs.lightshield;
-    outputs.buttonR = inputs.midshield;
+    outputs.triggerLDigital = inputs.lightshield;
+    outputs.triggerRDigital = inputs.midshield;
 
     // Menu keys
     outputs.start = inputs.start;
