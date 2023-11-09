@@ -26,11 +26,11 @@ KeyboardMode *current_kb_mode = nullptr;
 GpioButtonMapping button_mappings[] = {
     {&InputState::mod_x,        5 },
     { &InputState::left,        4 },
-    { &InputState::up,          3 },
+    { &InputState::down,        3 },
     { &InputState::right,       2 },
 
     { &InputState::mod_y,       6 },
-    { &InputState::down,        7 },
+    { &InputState::up,          7 },
 
  // { &InputState::select,      10},
     { &InputState::start,       0 },

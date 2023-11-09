@@ -18,8 +18,8 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     // Directions
     outputs.dpadLeft = inputs.left;
     outputs.dpadRight = inputs.right;
-    outputs.dpadDown = inputs.up;
-    outputs.dpadUp = inputs.down || inputs.a;
+    outputs.dpadDown = inputs.down;
+    outputs.dpadUp = inputs.up || inputs.a;
 
     // Right hand bottom row
     outputs.a = inputs.x;
