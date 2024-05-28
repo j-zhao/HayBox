@@ -34,10 +34,7 @@ void select_mode(CommunicationBackend *backend) {
     InputState &inputs = backend->GetInputs();
     if (inputs.mod_x && !inputs.mod_y && inputs.start) {
         if (inputs.l) {
-            set_mode(
-                backend,
-                new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
-            );
+            set_mode(backend, new Melee20Button(socd::SOCD_2IP, { .crouch_walk_os = false }));
         } else if (inputs.left) {
             set_mode(
                 backend,
