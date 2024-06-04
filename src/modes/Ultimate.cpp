@@ -8,25 +8,25 @@
 Ultimate::Ultimate(socd::SocdType socd_type) {
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
-        socd::SocdPair{&InputState::left,    &InputState::right,   socd_type},
-        socd::SocdPair{ &InputState::down,   &InputState::up,      socd_type},
-        socd::SocdPair{ &InputState::c_left, &InputState::c_right, socd_type},
-        socd::SocdPair{ &InputState::c_down, &InputState::c_up,    socd_type},
+        socd::SocdPair{ &InputState::left,   &InputState::right,   socd_type },
+        socd::SocdPair{ &InputState::down,   &InputState::up,      socd_type },
+        socd::SocdPair{ &InputState::c_left, &InputState::c_right, socd_type },
+        socd::SocdPair{ &InputState::c_down, &InputState::c_up,    socd_type },
     };
 }
 
 void Ultimate::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.a = inputs.a;
     outputs.b = inputs.b;
-    outputs.x = inputs.x;
+    outputs.x = inputs.x || inputs.select;
     outputs.y = inputs.y;
     outputs.buttonL = inputs.lightshield;
     outputs.buttonR = inputs.z || inputs.midshield;
     outputs.triggerLDigital = inputs.l;
     outputs.triggerRDigital = inputs.r;
     outputs.start = inputs.start;
-    outputs.select = inputs.select;
-    outputs.home = inputs.home;
+    // outputs.select = inputs.select;
+    // outputs.home = inputs.home;
 
     // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
     if ((inputs.mod_x && inputs.mod_y) || inputs.nunchuk_c) {

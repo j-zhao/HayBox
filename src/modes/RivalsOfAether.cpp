@@ -64,7 +64,6 @@ void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &output
 
     bool shield_button_pressed = inputs.l || inputs.r;
 
-
     // 48 total DI angles, 24 total Up b angles, 16 total airdodge angles
 
     if (inputs.mod_x) {
@@ -76,7 +75,7 @@ void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &output
             }
         }
 
-        if(directions.vertical) {
+        if (directions.vertical) {
             outputs.leftStickY = 128 + (directions.y * 44);
             // MX Vertical Tilts
             if (inputs.a) {
@@ -100,12 +99,12 @@ void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &output
                 outputs.leftStickX = 128 + (directions.x * 52);
                 outputs.leftStickY = 128 + (directions.y * 31);
             }
-      
+
             if (inputs.c_up) {
                 outputs.leftStickX = 128 + (directions.x * 49);
                 outputs.leftStickY = 128 + (directions.y * 35);
             }
-     
+
             if (inputs.c_right) {
                 outputs.leftStickX = 128 + (directions.x * 51);
                 outputs.leftStickY = 128 + (directions.y * 43);
@@ -118,7 +117,7 @@ void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &output
             outputs.leftStickX = 128 + (directions.x * 44);
         }
 
-        if(directions.vertical) {
+        if (directions.vertical) {
             outputs.leftStickY = 128 + (directions.y * 67);
         }
 
@@ -138,12 +137,12 @@ void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &output
                 outputs.leftStickX = 128 + (directions.x * 44);
                 outputs.leftStickY = 128 + (directions.y * 74);
             }
-      
+
             if (inputs.c_up) {
                 outputs.leftStickX = 128 + (directions.x * 45);
                 outputs.leftStickY = 128 + (directions.y * 63);
             }
-     
+
             if (inputs.c_right) {
                 outputs.leftStickX = 128 + (directions.x * 47);
                 outputs.leftStickY = 128 + (directions.y * 57);
