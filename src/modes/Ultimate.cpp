@@ -18,7 +18,7 @@ Ultimate::Ultimate(socd::SocdType socd_type) {
 void Ultimate::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.a = inputs.a;
     outputs.b = inputs.b;
-    outputs.x = inputs.x || inputs.select;
+    outputs.x = inputs.x;
     outputs.y = inputs.y;
     outputs.buttonL = inputs.lightshield;
     outputs.buttonR = inputs.z || inputs.midshield;
