@@ -6,6 +6,7 @@ ControllerMode::ControllerMode() {
 }
 
 void ControllerMode::UpdateOutputs(InputState &inputs, OutputState &outputs) {
+    inputs.up = (inputs.up || inputs.w);
     HandleSocd(inputs);
     UpdateDigitalOutputs(inputs, outputs);
     UpdateAnalogOutputs(inputs, outputs);
