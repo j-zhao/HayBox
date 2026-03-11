@@ -9,7 +9,11 @@ void reboot_firmware() {
 }
 
 void reboot_bootloader() {
-    // TODO: Set magic word at end of RAM to enter system bootloader after reset.
-    // For now, just reset into firmware.
+    // Write magic to top of RAM to signal DFU bootloader entry on reset.
+    // Linker reserves last 8 bytes (LENGTH = 96K - 8), so __msp_init points there.
+    // Compatible with davidgfnet/stm32-dfu-bootloader reboot protocol.
+    extern uint32_t __msp_init;
+    volatile uint64_t *magic = (volatile uint64_t *)&__msp_init;
+    *magic = 0xDEADBEEFCC00FFEEULL;
     nvic_sys_reset();
 }
