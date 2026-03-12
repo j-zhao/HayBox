@@ -15,5 +15,5 @@ for d in cppdefines:
 env.Replace(CPPDEFINES=new_defines)
 
 # Add our config dir to linker search path for the custom .ld file
-ld_dir = os.path.join(env["PROJECT_DIR"], "config", "stm32pintester")
+ld_dir = os.path.join(env["PROJECT_DIR"], "config", "jz-stm32-leverless")
 env.Prepend(LIBPATH=[ld_dir])

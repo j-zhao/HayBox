@@ -85,7 +85,7 @@ const Config default_config = {
     .communication_backend_configs = new CommunicationBackendConfig[1] {
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_XINPUT,
-            .default_mode_config = 1,
+            .default_mode_config = 4,
             .activation_binding_count = 0,
             .activation_binding = {},
             .secondary_backends = {},
