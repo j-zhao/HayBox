@@ -67,6 +67,8 @@ CommunicationBackend **backends = nullptr;
 size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
+GameModeConfig *find_fgc_config(Config &cfg);
+
 void setup() {
     // Free PA15, PB3, PB4 from JTAG for GPIO use (keep SWD on PA13/PA14).
     afio_cfg_debug_ports(AFIO_DEBUG_SW_ONLY);
@@ -88,6 +90,12 @@ void setup() {
     static InputSource *input_sources[] = { &gpio_input };
     size_t input_source_count = sizeof(input_sources) / sizeof(InputSource *);
 
+    // Default FGC vertical SOCD to Up priority (Dir1 = Up wins over Down).
+    GameModeConfig *fgc = find_fgc_config(config);
+    if (fgc && fgc->socd_pairs_count >= 2) {
+        fgc->socd_pairs[1] = { BTN_LT1, BTN_LF2, SOCD_DIR1_PRIORITY };
+    }
+
     backend_count =
         initialize_backends(backends, inputs, input_sources, input_source_count, config, pinout);
 
@@ -105,10 +113,11 @@ GameModeConfig *find_fgc_config(Config &cfg) {
 
 static SocdType next_socd(SocdType current) {
     switch (current) {
-        case SOCD_NEUTRAL:      return SOCD_2IP;
-        case SOCD_2IP:          return SOCD_2IP_NO_REAC;
-        case SOCD_2IP_NO_REAC:  return SOCD_NEUTRAL;
-        default:                return SOCD_NEUTRAL;
+        case SOCD_DIR1_PRIORITY: return SOCD_NEUTRAL;
+        case SOCD_NEUTRAL:       return SOCD_2IP;
+        case SOCD_2IP:           return SOCD_2IP_NO_REAC;
+        case SOCD_2IP_NO_REAC:   return SOCD_DIR1_PRIORITY;
+        default:                 return SOCD_DIR1_PRIORITY;
     }
 }
 
@@ -122,11 +131,8 @@ void loop() {
 
     if (combo_held && !combo_was_held) {
         GameModeConfig *fgc_cfg = find_fgc_config(config);
-        if (fgc_cfg != nullptr) {
-            SocdType new_socd = next_socd(fgc_cfg->socd_pairs[0].socd_type);
-            for (size_t i = 0; i < fgc_cfg->socd_pairs_count; i++) {
-                fgc_cfg->socd_pairs[i].socd_type = new_socd;
-            }
+        if (fgc_cfg != nullptr && fgc_cfg->socd_pairs_count >= 2) {
+            fgc_cfg->socd_pairs[1].socd_type = next_socd(fgc_cfg->socd_pairs[1].socd_type);
             // Re-apply config if FGC mode is currently active.
             InputMode *current_mode = backends[0]->CurrentGameMode();
             if (current_mode != nullptr) {
