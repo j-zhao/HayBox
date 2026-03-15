@@ -9,6 +9,7 @@ Left hand (movement + utility):
   B1(PC0)   B2(PC2)   B3(PA4)
   B4(PD2)   B5(PA7)   B6(PB7)
   B7(PB9)   B8(PB11)  B9(PB1)   B10(PC5)
+  B11(PB15) B12(PA7)
 ```
 
 Right hand (attacks):
