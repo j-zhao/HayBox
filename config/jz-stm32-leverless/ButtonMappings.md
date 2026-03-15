@@ -20,7 +20,7 @@ Right hand (attacks):
   B26(PC7)  B27(PA0)
 ```
 
-Shared pins: B5/B12 share PA7 (26 unique pins, 27 buttons).
+Shared pins: B5/B12 share PA7 → both mapped to DPad Up (26 unique pins, 27 buttons).
 B8/B11 are NOT shared — B8=PB11, B11=PB15.
 
 ## Button-to-XInput Mapping
@@ -31,18 +31,18 @@ B8/B11 are NOT shared — B8=PB11, B11=PB15.
 | B2     | PC2  | BTN_RT3  | Select     |                                |
 | B3     | PA4  | BTN_RT2  | Home       | Also bootloader entry          |
 | B4     | PD2  | —        | —          | Unmapped                       |
-| B5     | PA7  | —        | —          | Unmapped (shared with B12)     |
+| B5     | PA7  | BTN_LT1  | DPad Up    | Shared pin with B12            |
 | B6     | PB7  | —        | —          | Unmapped                       |
 | B7     | PB9  | BTN_LT2 | L3         |                                |
 | B8     | PB11 | BTN_LF3 | DPad Left  |                                |
 | B9     | PB1  | BTN_LF2 | DPad Down  |                                |
 | B10    | PC5  | BTN_LF1 | DPad Right |                                |
-| B11    | PB15 | —        | —          | Unmapped                       |
-| B12    | PA7  | —        | —          | Shared pin with B5, both unmapped |
-| B13    | PB12 | —        | —          | Unmapped                       |
-| B14    | PC8  | —        | —          | Unmapped                       |
-| B15    | PC9  | —        | —          | Unmapped                       |
-| B16    | PC10 | —        | —          | Unmapped                       |
+| B11    | PB15 | BTN_LT2  | L3         | Same as B7                     |
+| B12    | PA7  | BTN_LT1  | DPad Up    | Shared pin with B5             |
+| B13    | PB12 | BTN_RT1  | R3         | Same as B27                    |
+| B14    | PC8  | BTN_MB1  | Start      | Same as B1                     |
+| B15    | PC9  | BTN_RT3  | Select     | Same as B2                     |
+| B16    | PC10 | BTN_RT2  | Home       | Same as B3                     |
 | B17    | PC11 | —        | —          | Unmapped                       |
 | B18    | PA5  | BTN_RF5 | X          |                                |
 | B19    | PA3  | BTN_RF6 | Y          |                                |
@@ -57,9 +57,9 @@ B8/B11 are NOT shared — B8=PB11, B11=PB15.
 
 ## Unmapped Buttons (Available for Future Use)
 
-B4 (PD2), B5/B12 (PA7), B6 (PB7), B11 (PB15), B13 (PB12), B14 (PC8), B15 (PC9), B16 (PC10), B17 (PC11)
+B4 (PD2), B6 (PB7), B17 (PC11)
 
-These 9 unique pins (10 buttons) are not mapped to any BTN_* value.
+These 3 unique pins (3 buttons) are not mapped to any BTN_* value.
 
 ## SOCD Toggle
 

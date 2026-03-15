@@ -29,9 +29,14 @@ const GpioButtonMapping button_mappings[] = {
     { BTN_MB1,  PC0  },  // B1  - Start
     { BTN_RT3,  PC2  },  // B2  - Select
     { BTN_RT2,  PA4  },  // B3  - Home (also bootloader entry)
+    { BTN_MB1,  PC8  },  // B14 - Start (same as B1)
+    { BTN_RT3,  PC9  },  // B15 - Select (same as B2)
+    { BTN_RT2,  PC10 },  // B16 - Home (same as B3)
 
     // Left hand — movement
+    { BTN_LT1,  PA7  },  // B5  - DPad Up (also PA7/B12)
     { BTN_LT2,  PB9  },  // B7  - L3
+    { BTN_LT2,  PB15 },  // B11 - L3 (same as B7)
     { BTN_LF3,  PB11 },  // B8  - DPad Left
     { BTN_LF2,  PB1  },  // B9  - DPad Down
     { BTN_LF1,  PC5  },  // B10 - DPad Right
@@ -49,6 +54,7 @@ const GpioButtonMapping button_mappings[] = {
     // Bottom row
     { BTN_LT1,  PC7  },  // B26 - DPad Up
     { BTN_RT1,  PA0  },  // B27 - R3
+    { BTN_RT1,  PB12 },  // B13 - R3 (same as B27)
 };
 const size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
