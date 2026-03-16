@@ -18,6 +18,8 @@ XInputBackend::XInputBackend(
     USBComposite.begin();
     while (!USBComposite)
         ;
+    // Suppress auto-send on each setter call; we send once at the end of SendReport().
+    _xbox360.setManualReportMode(true);
 }
 
 CommunicationBackendId XInputBackend::BackendId() {
