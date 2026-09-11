@@ -1,18 +1,32 @@
-Import("env")
-import os, re
+from pathlib import Path
+import re
 
-# Patch USBComposite usb_x360w.c to set bInterval=1 (1ms/1000Hz polling).
-# The library default is 4ms (250Hz), which causes noticeable input latency.
 
-libdeps = env.subst("$PROJECT_LIBDEPS_DIR")
-target_file = os.path.join(libdeps, env["PIOENV"],
-                           "USBComposite for STM32F1", "usb_x360w.c")
+def interval_field(source, endpoint, allowed):
+    pattern = r"\." + endpoint + r"\s*=\s*\{[^{}]*?\.bInterval\s*=\s*(\d+)\s*,"
+    matches = list(re.finditer(pattern, source))
+    if len(matches) != 1:
+        raise RuntimeError(f"USBComposite: expected one {endpoint} interval")
+    match = matches[0]
+    if match.group(1) not in allowed:
+        raise RuntimeError(f"USBComposite: unexpected {endpoint} interval {match.group(1)}")
+    return match.span(1)
 
-if os.path.isfile(target_file):
-    with open(target_file, "r") as f:
-        src = f.read()
-    patched = re.sub(r"(\.bInterval\s*=\s*)[48](,)", r"\g<1>1\2", src)
-    if patched != src:
-        with open(target_file, "w") as f:
-            f.write(patched)
-        print("Patched usb_x360w.c: bInterval → 1ms (1000Hz)")
+
+globals()["Import"]("env")
+env = globals()["env"]
+
+# USBXBox360 uses the wired descriptor; keep host output polling unchanged.
+target = (
+    Path(env.subst("$PROJECT_LIBDEPS_DIR"))
+    / env["PIOENV"]
+    / "USBComposite for STM32F1"
+    / "usb_multi_x360.c"
+)
+source = target.read_text()
+start, end = interval_field(source, "DataInEndpoint", {"1", "4"})
+interval_field(source, "DataOutEndpoint", {"8"})
+patched = source[:start] + "1" + source[end:]
+if patched != source:
+    target.write_text(patched)
+print("Verified wired XInput polling: IN 1 ms, OUT 8 ms")

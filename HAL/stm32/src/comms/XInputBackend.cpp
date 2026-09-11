@@ -60,5 +60,8 @@ void XInputBackend::SendReport() {
     _xbox360.XRight((_outputs.rightStickX - 128) * 65535 / 255 + 128);
     _xbox360.YRight((_outputs.rightStickY - 128) * 65535 / 255 + 128);
 
-    _xbox360.send();
+    // Use x360_tx to keep input scanning active when the USB endpoint is busy.
+    if (USBComposite) {
+        x360_tx(0, _xbox360.getReport(), _xbox360.getReportSize());
+    }
 }

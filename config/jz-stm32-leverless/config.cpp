@@ -139,11 +139,6 @@ void loop() {
         GameModeConfig *fgc_cfg = find_fgc_config(config);
         if (fgc_cfg != nullptr && fgc_cfg->socd_pairs_count >= 2) {
             fgc_cfg->socd_pairs[1].socd_type = next_socd(fgc_cfg->socd_pairs[1].socd_type);
-            // Re-apply config if FGC mode is currently active.
-            InputMode *current_mode = backends[0]->CurrentGameMode();
-            if (current_mode != nullptr) {
-                current_mode->SetConfig(*fgc_cfg);
-            }
         }
     }
     combo_was_held = combo_held;
